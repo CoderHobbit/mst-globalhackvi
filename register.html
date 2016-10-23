@@ -1,0 +1,69 @@
+
+<!-- saved from url=(0069)file:///C:/Users/Boston/Desktop/Programs/GlobalHack2016/register.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body><doctype html="">
+
+<link rel="stylesheet" type="text/css" href="register.css">
+<title>Register</title>
+
+
+<div class="body"></div>
+<div id="forms">
+	<input type="text" ,="" name="FIRST_NAME", id = "a" placeholder="First Name"><br>
+	<input type="text" ,="" name="LAST_NAME", id = "b" placeholder="Last Name"><br>
+	<input type="text" ,="" name="MIDDLE_NAME", id = "c" placeholder="Middle Name"><br>
+	<input type="number" ,="" name="SSN", id = "d" placeholder="SSN"><br>
+	<input type="datetime" ,="" name="DOB", id = "e" placeholder="DOB: yy/mm/dd"><br>
+	<input type="number" ,="" name="SHELTER_ID", id = "f" placeholder="Shelter ID"><br>
+	<input type="number" ,="" name="GENDER", id = "g" placeholder="Gender 0=Male 1 =Female"><br>
+	<input type="number" ,="" name="ISCHILD", id = "h" placeholder="Under 18? 0=no 1=yes"><br>
+	<select type="input" ,="" name="Race", id = "i" placeholder="Race">
+		<option value="white">Caucasian</option>
+		<option value="black">African American</option>
+		<option value="hispanic">Hispanic</option>
+	</select><br>
+	<input type="number" ,="" name="ISVETEREN", id = "j" placeholder="Veteran? 0=no 1=yes"><br>
+	<input type="number" ,="" name="INCOME", id = "k" placeholder="Income"><br>
+	<input type="number" ,="" name="ISPREGNANT", id = "l" placeholder="Pregnant? 0=no 1=yes"><br>
+	<input type="number" ,="" name="HASCRIMHIST", id = "m" placeholder="Has criminal history? 0=no 1=yes"><br>
+	<input type="number" ,="" name="ISSEXOFFENDER", id = "n" placeholder="Sex offender 0=no 1=yes"><br>
+	<button type="submit" ,="" name="register", id = "sub">Register</button>
+	</div>
+        
+	<script src = "/socket.io/socket.io.js"></script>
+
+	<script>
+          var socket = io();	  
+
+	  document.getElementById("sub").onclick =
+	    function()
+	    {
+	      // Grab all the values
+	      var a = document.getElementById("a").value;
+	      var b = document.getElementById("b").value;
+	      var c = document.getElementById("c").value;
+	      var d = document.getElementById("d").value;
+	      var e = document.getElementById("e").value;
+	      var f = document.getElementById("f").value;
+	      var g = document.getElementById("g").value;
+	      var h = document.getElementById("h").value;
+	      var i = document.getElementById("i").value;
+	      var j = document.getElementById("j").value;
+              var date = new Date().toISOString().slice(0, 10).replace('T', ' ');
+	      console.log(date);
+              //var date = d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+	      var k = document.getElementById("k").value;
+	      var l = document.getElementById("l").value;
+	      var m = document.getElementById("m").value;
+	      var n = document.getElementById("n").value;
+
+	      // Run sql query
+	      var query = "INSERT INTO Clients (FIRST_NAME, LAST_NAME, MIDDLE_NAME, SSN, DOB, SHELTER_ID, GENDER, ISCHILD, RACE, ISVETEREN, DATE_CREATED, DATE_UPDATED, INCOME, ISPREGNANT, HASCRIMHIST, ISSEXOFFENDER) VALUES (\'"+a+"\',\'"+b+"\',\'"+c+"\',\'"+d+"\',\'"+e+"\',\'"+f+"\',\'"+g+"\',\'"+h+"\',\'"+i+"\',\'"+j+"\',\'"+date+"\',\'"+date+"\',\'"+k+"\',\'"+l+"\',\'"+m+"\',\'"+n+"\')";
+
+	      socket.emit("run", query);
+	
+	      // Done
+              alert("Done!");
+	    }
+        </script>
+
+</doctype></body></html>
