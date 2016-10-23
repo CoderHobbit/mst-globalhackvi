@@ -172,8 +172,8 @@ io.on("connection",
       });
 
 // Port and IP address
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8081;
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '10.4.67.202';
+var server_port =  8081;
+var server_ip_address = 'localhost';
 
 // Begin listening for requests
 app.listen(server_port, server_ip_address,
